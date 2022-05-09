@@ -26,7 +26,7 @@ app.get("/", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // const festivals = await Festival.find({});
     return res.send(festivals);
 }));
-app.listen(3000, () => {
+app.listen(process.env.PORT || 3000, () => {
     console.log("server running");
 });
 const festivalSchema = new mongoose_1.default.Schema({
