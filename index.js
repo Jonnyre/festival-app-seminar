@@ -15,8 +15,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
 const mongoose_1 = __importDefault(require("mongoose"));
+const cors_1 = __importDefault(require("cors"));
 const app = (0, express_1.default)();
 app.use((0, body_parser_1.json)());
+app.use((0, cors_1.default)());
 mongoose_1.default.connect("mongodb+srv://admin:Test123@festivalapp.oheeh.mongodb.net/FestivalDB?retryWrites=true&w=majority");
 const connection = mongoose_1.default.connection;
 app.get("/", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {

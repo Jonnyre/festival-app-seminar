@@ -1,9 +1,11 @@
 import express, {Request, Response} from "express";
 import { json } from "body-parser";
 import mongoose from "mongoose"
+import cors from "cors";
 
-const app = express()
-app.use(json())
+const app = express();
+app.use(json());
+app.use(cors());
 
 mongoose.connect("mongodb+srv://admin:Test123@festivalapp.oheeh.mongodb.net/FestivalDB?retryWrites=true&w=majority");
 const connection = mongoose.connection
