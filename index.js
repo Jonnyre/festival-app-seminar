@@ -25,16 +25,21 @@ app.get("/", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
     const festivals = yield collection.find({}).toArray();
-    // const festivals = await Festival.find({});
     return res.send(festivals);
+}));
+app.get("/:id", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Request!!!");
+    const collection = connection.db.collection("Festival");
+    const festival = yield collection.find({ _id: req.params.id }).toArray();
+    return res.send(festival[0]);
 }));
 app.listen(process.env.PORT || 3000, () => {
     console.log("server running");
 });
 const festivalSchema = new mongoose_1.default.Schema({
     name: String,
-    startDate: String,
-    endDate: String,
+    startDate: Date,
+    endDate: Date,
     place: String,
     latitude: Number,
     longitude: Number,

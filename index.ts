@@ -1,6 +1,6 @@
 import express, {Request, Response} from "express";
 import { json } from "body-parser";
-import mongoose from "mongoose"
+import mongoose, { Mongoose } from "mongoose"
 import cors from "cors";
 
 const app = express();
@@ -14,8 +14,14 @@ app.get("/", [], async (req: Request, res: Response) => {
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
     const festivals = await collection.find({}).toArray()
-    // const festivals = await Festival.find({});
     return res.send(festivals)
+})
+
+app.get("/:id", [], async (req: Request, res: Response) => {
+    console.log("Request!!!");
+    const collection = connection.db.collection("Festival");
+    const festival = await collection.find({_id: req.params.id}).toArray();
+    return res.send(festival[0])
 })
 
 app.listen(process.env.PORT || 3000, () => {
@@ -24,8 +30,8 @@ app.listen(process.env.PORT || 3000, () => {
 
 const festivalSchema = new mongoose.Schema({
     name: String,
-    startDate: String,
-    endDate: String,
+    startDate: Date,
+    endDate: Date,
     place: String,
     latitude: Number,
     longitude: Number,
