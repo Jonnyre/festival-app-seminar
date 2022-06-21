@@ -37,7 +37,9 @@ app.post("/createFestival", [], (req, res) => __awaiter(void 0, void 0, void 0, 
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
     console.log(req.body);
-    yield collection.insertOne({ name: req.body.name, startDate: new Date(req.body.startDate), endDate: new Date(req.body.endDate), place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
+    const startDateMongo = new Date(req.body.startDate);
+    const endDateMongo = new Date(req.body.endDate);
+    yield collection.insertOne({ name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
     return res.send();
 }));
 app.listen(process.env.PORT || 3000, () => {
