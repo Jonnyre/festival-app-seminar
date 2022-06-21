@@ -2,6 +2,7 @@ import express, {Request, Response} from "express";
 import { json } from "body-parser";
 import mongoose, { Mongoose } from "mongoose"
 import cors from "cors";
+import mongo from "mongodb"
 
 const ObjectID = mongo.ObjectID;
 
@@ -33,14 +34,9 @@ app.post("/createFestival", [], async (req: Request, res: Response) => {
     const collection = connection.db.collection("Festival");
     console.log(req.body);
     const startDateMongo = new Date(req.body.startDate);
-<<<<<<< HEAD
     const endDateMongo = new Date(req.body.endDate);
     const objectId = new ObjectID();
     await collection.insertOne({_id: objectId, name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
-=======
-    const endDateMongo = new Date(req.body.endDate)
-    await collection.insertOne({name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
->>>>>>> parent of bbf44bf... objectid
     return res.send()
 })
 
