@@ -33,6 +33,13 @@ app.get("/:id", [], (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     const festival = yield collection.find({ _id: req.params.id }).toArray();
     return res.send(festival[0]);
 }));
+app.post("/createFestival", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log("Request!!!");
+    const collection = connection.db.collection("Festival");
+    console.log(req.body.name);
+    yield collection.insertOne({ name: req.body.name, startDate: req.body.startDate, endDate: req.body.endDate, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
+    return res.send();
+}));
 app.listen(process.env.PORT || 3000, () => {
     console.log("server running");
 });

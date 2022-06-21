@@ -3,6 +3,7 @@ import { json } from "body-parser";
 import mongoose, { Mongoose } from "mongoose"
 import cors from "cors";
 
+
 const app = express();
 app.use(json());
 app.use(cors());
@@ -13,6 +14,7 @@ const connection = mongoose.connection
 app.get("/", [], async (req: Request, res: Response) => {
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
+    
     const festivals = await collection.find({}).toArray()
     return res.send(festivals)
 })
@@ -22,6 +24,14 @@ app.get("/:id", [], async (req: Request, res: Response) => {
     const collection = connection.db.collection("Festival");
     const festival = await collection.find({_id: req.params.id}).toArray();
     return res.send(festival[0])
+})
+
+app.post("/createFestival", [], async (req: Request, res: Response) => {
+    console.log("Request!!!");
+    const collection = connection.db.collection("Festival");
+    console.log(req.body.name);
+    await collection.insertOne({name: req.body.name, startDate: req.body.startDate, endDate: req.body.endDate, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
+    return res.send()
 })
 
 app.listen(process.env.PORT || 3000, () => {
