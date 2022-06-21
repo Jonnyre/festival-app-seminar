@@ -4,7 +4,7 @@ import mongoose, { Mongoose } from "mongoose"
 import cors from "cors";
 import mongo from "mongodb"
 
-const ObjectID = mongo.ObjectID;
+const ObjectId = require('mongodb').ObjectID;
 
 
 const app = express();
@@ -35,8 +35,7 @@ app.post("/createFestival", [], async (req: Request, res: Response) => {
     console.log(req.body);
     const startDateMongo = new Date(req.body.startDate);
     const endDateMongo = new Date(req.body.endDate);
-    const objectId = new ObjectID();
-    await collection.insertOne({_id: objectId, name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
+    await collection.insertOne({_id: new ObjectId(), name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
     return res.send()
 })
 
