@@ -16,6 +16,7 @@ const express_1 = __importDefault(require("express"));
 const body_parser_1 = require("body-parser");
 const mongoose_1 = __importDefault(require("mongoose"));
 const cors_1 = __importDefault(require("cors"));
+const mongodb_1 = __importDefault(require("mongodb"));
 const app = (0, express_1.default)();
 app.use((0, body_parser_1.json)());
 app.use((0, cors_1.default)());
@@ -39,7 +40,8 @@ app.post("/createFestival", [], (req, res) => __awaiter(void 0, void 0, void 0, 
     console.log(req.body);
     const startDateMongo = new Date(req.body.startDate);
     const endDateMongo = new Date(req.body.endDate);
-    yield collection.insertOne({ name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
+    const objectId = new mongodb_1.default.ObjectId();
+    yield collection.insertOne({ _id: objectId, name: req.body.name, startDate: startDateMongo, endDate: endDateMongo, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
     return res.send();
 }));
 app.listen(process.env.PORT || 3000, () => {
