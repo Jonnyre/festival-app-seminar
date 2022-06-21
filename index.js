@@ -36,7 +36,7 @@ app.get("/:id", [], (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 app.post("/createFestival", [], (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
-    console.log(req.body.name);
+    console.log(req.body);
     yield collection.insertOne({ name: req.body.name, startDate: req.body.startDate, endDate: req.body.endDate, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable });
     return res.send();
 }));

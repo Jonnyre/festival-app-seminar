@@ -29,7 +29,7 @@ app.get("/:id", [], async (req: Request, res: Response) => {
 app.post("/createFestival", [], async (req: Request, res: Response) => {
     console.log("Request!!!");
     const collection = connection.db.collection("Festival");
-    console.log(req.body.name);
+    console.log(req.body);
     await collection.insertOne({name: req.body.name, startDate: req.body.startDate, endDate: req.body.endDate, place: req.body.place, latitude: req.body.latitude, longitude: req.body.longitude, price: req.body.price, ticketCountAvailable: req.body.ticketCountAvailable})
     return res.send()
 })
